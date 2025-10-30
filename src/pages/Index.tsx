@@ -17,10 +17,8 @@ import {
   CheckCircle2,
   Gift,
 } from "lucide-react";
-import ebookCoverOriginal from "@/assets/ebook-cover.png";
+import ebookCover from "@/assets/ebook-cover.png";
 import { useState, useEffect } from "react";
-
-const ebookCover = `${ebookCoverOriginal}?v=${Date.now()}`;
 
 const Index = () => {
   const [isFixed, setIsFixed] = useState(false);
