@@ -43,12 +43,14 @@ const Index = () => {
         <div className="fixed top-2 sm:top-4 left-0 right-0 z-50 px-3 sm:px-4 animate-fade-in">
           <div className="max-w-4xl mx-auto">
             <Button
-              onClick={scrollToCTA}
+              asChild
               size="lg"
               variant="cta"
               className="w-full shadow-[var(--shadow-glow)] animate-pulse-glow text-xs sm:text-sm md:text-base py-2 sm:py-3"
             >
-              💋 Quero ativar meu sex appeal agora!
+              <a href="https://pay.cakto.com.br/3a5yt4t_629198" target="_blank" rel="noopener noreferrer">
+                💋 Quero ativar meu sex appeal agora!
+              </a>
             </Button>
           </div>
         </div>
@@ -128,12 +130,14 @@ const Index = () => {
             {/* CTA Button */}
             <div className="px-2">
               <Button
+                asChild
                 size="lg"
                 variant="cta"
-                onClick={scrollToCTA}
                 className="shadow-[var(--shadow-glow)] animate-pulse-glow text-sm sm:text-base md:text-lg w-full sm:w-auto"
               >
-                💋 Quero ativar meu sex appeal agora!
+                <a href="https://pay.cakto.com.br/3a5yt4t_629198" target="_blank" rel="noopener noreferrer">
+                  💋 Quero ativar meu sex appeal agora!
+                </a>
               </Button>
             </div>
 
@@ -519,11 +523,14 @@ const Index = () => {
 
             <div className="px-2">
               <Button
+                asChild
                 size="lg"
                 variant="cta"
                 className="shadow-[var(--shadow-glow)] animate-pulse-glow text-sm sm:text-base md:text-lg lg:text-xl px-6 sm:px-8 md:px-12 lg:px-16 h-14 sm:h-16 md:h-20 w-full sm:w-auto"
               >
-                🔥 QUERO ME TORNAR INESQUECÍVEL AGORA!
+                <a href="https://pay.cakto.com.br/3a5yt4t_629198" target="_blank" rel="noopener noreferrer">
+                  🔥 QUERO ME TORNAR INESQUECÍVEL AGORA!
+                </a>
               </Button>
             </div>
 
