@@ -1,6 +1,5 @@
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import {
   Accordion,
   AccordionContent,
@@ -8,522 +7,545 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import {
-  Sparkles,
-  Eye,
   Heart,
-  Crown,
-  CheckCircle2,
+  Sparkles,
   Star,
-  Shield,
-  Clock,
-  Users,
-  ArrowRight,
+  Eye,
+  Crown,
   Zap,
+  Shield,
+  CheckCircle2,
+  Gift,
 } from "lucide-react";
 import ebookCover from "@/assets/ebook-cover.png";
+import { useState, useEffect } from "react";
 
 const Index = () => {
-  const [isCtaFixed, setIsCtaFixed] = useState(false);
+  const [isFixed, setIsFixed] = useState(false);
 
-  // Fixed CTA button on scroll
-  if (typeof window !== "undefined") {
-    window.addEventListener("scroll", () => {
-      setIsCtaFixed(window.scrollY > 800);
-    });
-  }
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsFixed(window.scrollY > 100);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
-  const scrollToCta = () => {
-    document.getElementById("cta-section")?.scrollIntoView({ behavior: "smooth" });
+  const scrollToCTA = () => {
+    const ctaSection = document.getElementById("cta-final");
+    ctaSection?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background via-secondary/30 to-background">
+    <div className="min-h-screen bg-background">
+      {/* Fixed CTA Button */}
+      {isFixed && (
+        <div className="fixed top-4 left-0 right-0 z-50 px-4 animate-fade-in">
+          <div className="max-w-4xl mx-auto">
+            <Button
+              onClick={scrollToCTA}
+              size="lg"
+              variant="cta"
+              className="w-full shadow-[var(--shadow-glow)] animate-pulse-glow"
+            >
+              💋 Quero ativar meu sex appeal agora!
+            </Button>
+          </div>
+        </div>
+      )}
+
       {/* Hero Section */}
-      <section className="relative overflow-hidden py-12 md:py-20 px-4 md:px-6">
-        <div className="absolute inset-0 bg-[var(--gradient-hero)] opacity-50" />
-        <div className="container max-w-6xl mx-auto relative z-10">
-          <div className="grid md:grid-cols-2 gap-8 md:gap-12 items-center">
-            {/* Left side - Text */}
-            <div className="space-y-6 animate-fade-in">
-              <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full">
-                <Sparkles className="w-4 h-4 text-primary" />
-                <span className="text-sm font-medium text-primary">Promoção por Tempo Limitado</span>
+      <section className="relative overflow-hidden py-12 md:py-20 px-4">
+        <div
+          className="absolute inset-0 opacity-30"
+          style={{ background: "var(--gradient-hero)" }}
+        />
+        <div className="relative max-w-6xl mx-auto">
+          <div className="text-center space-y-8 animate-fade-in">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-card border-2 border-primary/30 shadow-[var(--shadow-elegant)] animate-bounce-slow">
+              <Sparkles className="w-5 h-5 text-primary animate-shimmer" />
+              <span className="font-semibold text-sm uppercase tracking-wide gradient-text-rose">
+                Promoção de Lançamento
+              </span>
+            </div>
+
+            {/* Headline */}
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif font-bold text-foreground leading-tight">
+              Você pode ser linda…{" "}
+              <span className="gradient-text-rose text-shadow-glow">
+                mas sem sex appeal
+              </span>
+              , vai continuar sendo só a{" "}
+              <span className="italic">amiga legal</span>.
+            </h1>
+
+            {/* Subheadline */}
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+              Descubra como despertar sua sensualidade natural, aumentar sua
+              autoestima e atrair olhares — sem mudar quem você é.
+            </p>
+
+            {/* eBook Mockup with 3D Effect */}
+            <div className="py-8 md:py-12 animate-scale-in">
+              <div className="relative inline-block">
+                <div
+                  className="absolute inset-0 blur-3xl opacity-50 animate-pulse-slow"
+                  style={{
+                    background:
+                      "radial-gradient(circle, hsl(var(--cherry-red) / 0.4), hsl(var(--rose-gold) / 0.3))",
+                  }}
+                />
+                <img
+                  src={ebookCover}
+                  alt="Capa do eBook Desperte Seu Sex Appeal"
+                  className="relative w-64 md:w-80 lg:w-96 mx-auto drop-shadow-2xl transform hover:scale-105 transition-transform duration-500 animate-float"
+                  style={{
+                    filter: "drop-shadow(0 20px 40px hsl(var(--cherry-red) / 0.4))",
+                  }}
+                />
               </div>
-              
-              <h1 className="text-3xl md:text-5xl lg:text-6xl leading-tight">
-                Você pode ser linda… mas sem{" "}
-                <span className="gradient-text">sex appeal</span>, vai continuar sendo{" "}
-                <span className="italic">só a amiga legal.</span>
-              </h1>
-              
-              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-                Descubra como despertar sua sensualidade natural, aumentar sua autoestima e
-                atrair olhares — sem mudar quem você é.
+            </div>
+
+            {/* Pricing */}
+            <div className="space-y-4">
+              <div className="flex items-center justify-center gap-4">
+                <span className="text-2xl text-muted-foreground line-through">
+                  R$97,00
+                </span>
+                <span className="text-5xl md:text-6xl font-bold gradient-text-rose text-shadow-glow">
+                  R$47,90
+                </span>
+              </div>
+              <p className="text-lg text-muted-foreground">
+                ou em até{" "}
+                <span className="font-bold text-accent">
+                  12x de R$5,33 no cartão
+                </span>
               </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 items-start sm:items-center">
-                <div className="space-y-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm text-muted-foreground line-through">De R$ 97,00</span>
-                    <span className="bg-accent text-accent-foreground px-2 py-1 rounded text-xs font-bold">
-                      -51% OFF
-                    </span>
-                  </div>
-                  <div className="text-4xl md:text-5xl font-bold gradient-text">R$ 47,90</div>
-                  <p className="text-xs text-muted-foreground">Acesso imediato após o pagamento</p>
-                </div>
-              </div>
-
-              <Button
-                size="xl"
-                variant="cta"
-                onClick={scrollToCta}
-                className="w-full sm:w-auto animate-pulse-glow"
-              >
-                Quero Despertar Meu Sex Appeal
-                <ArrowRight className="ml-2" />
-              </Button>
-
-              <div className="flex items-center gap-6 text-sm text-muted-foreground pt-4">
-                <div className="flex items-center gap-2">
-                  <Users className="w-4 h-4 text-primary" />
-                  <span>+500 downloads</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Shield className="w-4 h-4 text-primary" />
-                  <span>Garantia de 7 dias</span>
-                </div>
-              </div>
             </div>
 
-            {/* Right side - Image */}
-            <div className="relative animate-scale-in">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl blur-3xl" />
-              <img
-                src={ebookCover}
-                alt="Capa do eBook Desperte Seu Sex Appeal"
-                className="relative z-10 w-full max-w-md mx-auto animate-float shadow-2xl rounded-2xl"
-              />
-            </div>
+            {/* CTA Button */}
+            <Button
+              size="xl"
+              variant="cta"
+              onClick={scrollToCTA}
+              className="shadow-[var(--shadow-glow)] animate-pulse-glow text-base md:text-lg"
+            >
+              💋 Quero ativar meu sex appeal agora!
+            </Button>
+
+            <p className="text-sm text-muted-foreground">
+              🔒 Acesso imediato após confirmação do pagamento
+            </p>
           </div>
         </div>
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 md:py-24 px-4 md:px-6 bg-secondary/50">
-        <div className="container max-w-6xl mx-auto">
-          <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-3xl md:text-4xl mb-4">
-              O Que Você Vai <span className="gradient-text">Descobrir</span>
-            </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Transforme sua presença e desperte sua força interior
-            </p>
-          </div>
+      <section className="py-16 md:py-24 px-4 bg-card">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-serif font-bold text-center mb-12 md:mb-16">
+            O que você vai{" "}
+            <span className="gradient-text-rose">descobrir</span>
+          </h2>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
             {[
               {
                 icon: Eye,
-                title: "Como ser notada sem mudar o corpo",
-                description: "Aprenda técnicas poderosas de presença que fazem você se destacar naturalmente",
-              },
-              {
-                icon: Crown,
-                title: "Como transmitir poder sem abrir a boca",
-                description: "Domine a linguagem corporal que comunica confiança e atração",
-              },
-              {
-                icon: Sparkles,
-                title: "Como vestir-se para ser desejada",
-                description: "Descubra o estilo que realça sua personalidade única e sensual",
-              },
-              {
-                icon: Heart,
-                title: "Como aumentar sua autoestima em poucos dias",
-                description: "Práticas diárias que transformam sua relação consigo mesma",
-              },
-              {
-                icon: Star,
-                title: "Como se tornar inesquecível para qualquer homem",
-                description: "O segredo das mulheres que deixam marcas profundas",
+                title: "Como ser notada",
+                description:
+                  "Mesmo sem mudar o corpo, aprenda a despertar atenção genuína",
               },
               {
                 icon: Zap,
-                title: "Ritual da Mulher Magnética",
-                description: "Rotina completa para despertar seu poder de atração todos os dias",
+                title: "Linguagem corporal sedutora",
+                description:
+                  "Gestos, postura e presença que atraem naturalmente",
+              },
+              {
+                icon: Crown,
+                title: "Autoestima forte",
+                description:
+                  "Use sua confiança interior como arma de sedução",
+              },
+              {
+                icon: Sparkles,
+                title: "Presença marcante",
+                description:
+                  "Desenvolva magnetismo pessoal e seja inesquecível",
+              },
+              {
+                icon: Star,
+                title: "Ritual diário",
+                description:
+                  "Práticas simples da mulher poderosa e magnética",
+              },
+              {
+                icon: Gift,
+                title: "Bônus exclusivos",
+                description: "Checklist + áudio de afirmações positivas",
               },
             ].map((benefit, index) => (
               <Card
                 key={index}
-                className="group hover:shadow-[var(--shadow-elegant)] transition-all duration-300 hover:scale-105 border-border/50 animate-fade-in"
+                className="p-6 md:p-8 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-[var(--shadow-elegant)] hover:-translate-y-2 animate-fade-in group"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <CardContent className="p-6 space-y-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-                    <benefit.icon className="w-6 h-6 text-primary" />
-                  </div>
-                  <h3 className="text-xl font-semibold">{benefit.title}</h3>
-                  <p className="text-muted-foreground">{benefit.description}</p>
-                </CardContent>
+                <benefit.icon className="w-12 h-12 md:w-14 md:h-14 text-primary mb-4 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="text-xl md:text-2xl font-serif font-bold mb-3">
+                  {benefit.title}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {benefit.description}
+                </p>
               </Card>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Content Section */}
-      <section className="py-16 md:py-24 px-4 md:px-6">
-        <div className="container max-w-4xl mx-auto">
-          <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-3xl md:text-4xl mb-4">
-              O Que Está <span className="gradient-text">Dentro do eBook</span>
-            </h2>
-            <p className="text-muted-foreground text-lg">
-              Conteúdo completo e prático para sua transformação
-            </p>
-          </div>
-
-          <div className="space-y-4">
-            {[
-              {
-                chapter: "Capítulo 1",
-                title: "O que é sex appeal de verdade",
-                description: "Entenda o conceito além dos clichês e descubra sua essência única",
-              },
-              {
-                chapter: "Capítulo 2",
-                title: "Linguagem corporal que atrai",
-                description: "Gestos, postura e movimentos que transmitem confiança irresistível",
-              },
-              {
-                chapter: "Capítulo 3",
-                title: "Autoestima como arma de sedução",
-                description: "Como se amar primeiro para ser amada da forma que merece",
-              },
-              {
-                chapter: "Capítulo 4",
-                title: "Como se vestir para ser lembrada",
-                description: "Guia de estilo para realçar sua personalidade e sensualidade",
-              },
-              {
-                chapter: "Capítulo 5",
-                title: "O ritual da mulher magnética",
-                description: "Rotina diária completa para manter seu poder de atração sempre ativo",
-              },
-            ].map((item, index) => (
-              <Card
-                key={index}
-                className="hover:shadow-lg transition-all duration-300 border-l-4 border-l-primary animate-fade-in"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <CardContent className="p-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-bold flex-shrink-0">
-                      {index + 1}
-                    </div>
-                    <div className="space-y-2 flex-1">
-                      <div className="text-sm text-primary font-semibold">{item.chapter}</div>
-                      <h3 className="text-xl font-semibold">{item.title}</h3>
-                      <p className="text-muted-foreground">{item.description}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
-
-            <Card className="bg-accent/10 border-2 border-accent animate-scale-in">
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
-                    <Star className="w-6 h-6 text-accent-foreground" />
-                  </div>
-                  <div className="space-y-2 flex-1">
-                    <div className="text-sm text-accent font-bold uppercase tracking-wide">
-                      Bônus Exclusivos
-                    </div>
-                    <h3 className="text-xl font-semibold">Checklist + Afirmações Positivas</h3>
-                    <p className="text-muted-foreground">
-                      Material extra para acompanhar sua evolução e fortalecer sua mentalidade de
-                      mulher poderosa
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
 
       {/* Testimonial Section */}
-      <section className="py-16 md:py-24 px-4 md:px-6 bg-secondary/50">
-        <div className="container max-w-4xl mx-auto">
-          <Card className="relative overflow-hidden border-2 border-primary/20 shadow-[var(--shadow-elegant)] animate-scale-in">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-primary/10 rounded-full blur-3xl" />
-            <CardContent className="p-8 md:p-12 relative z-10">
-              <div className="flex flex-col items-center text-center space-y-6">
-                <div className="flex gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-6 h-6 fill-accent text-accent" />
-                  ))}
-                </div>
-                <blockquote className="text-xl md:text-2xl font-serif italic leading-relaxed">
-                  "Depois de aplicar só um dos ensinamentos do eBook, um cara que me ignorava
-                  começou a me elogiar. Eu me senti{" "}
-                  <span className="gradient-text font-bold not-italic">poderosa</span>."
-                </blockquote>
-                <div>
-                  <div className="font-semibold text-lg">Mariana</div>
-                  <div className="text-muted-foreground">27 anos</div>
-                </div>
+      <section className="py-16 md:py-24 px-4">
+        <div className="max-w-4xl mx-auto">
+          <Card className="relative p-8 md:p-12 border-2 border-primary/30 shadow-[var(--shadow-elegant)] overflow-hidden animate-scale-in">
+            <div
+              className="absolute top-0 left-0 w-32 h-32 opacity-10"
+              style={{
+                background: "var(--gradient-rose)",
+              }}
+            />
+            <div
+              className="absolute bottom-0 right-0 w-32 h-32 opacity-10"
+              style={{
+                background: "var(--gradient-gold)",
+              }}
+            />
+
+            <div className="relative">
+              <Heart className="w-12 h-12 md:w-16 md:h-16 text-primary mb-6 mx-auto animate-pulse-slow" />
+
+              <blockquote className="text-xl md:text-3xl font-serif italic text-center mb-6 leading-relaxed">
+                "Depois de aplicar só um dos ensinamentos, um cara que me
+                ignorava começou a me elogiar. Eu me senti{" "}
+                <span className="gradient-text-rose font-bold not-italic">
+                  PODEROSA
+                </span>
+                ."
+              </blockquote>
+
+              <p className="text-center text-muted-foreground text-lg">
+                — Mariana, 27 anos
+              </p>
+
+              <div className="flex justify-center gap-1 mt-6">
+                {[1, 2, 3, 4, 5].map((star) => (
+                  <Star
+                    key={star}
+                    className="w-6 h-6 fill-accent text-accent"
+                  />
+                ))}
               </div>
-            </CardContent>
+            </div>
           </Card>
         </div>
       </section>
 
-      {/* Urgency Section */}
-      <section className="py-12 px-4 md:px-6 bg-primary/5">
-        <div className="container max-w-6xl mx-auto">
-          <div className="grid sm:grid-cols-2 gap-6 items-center">
-            <Card className="border-primary/30 hover:border-primary transition-colors animate-fade-in">
-              <CardContent className="p-6 flex items-center gap-4">
-                <Clock className="w-12 h-12 text-primary flex-shrink-0" />
-                <div>
-                  <h3 className="font-bold text-lg mb-1">Promoção por Tempo Limitado</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Aproveite o desconto de 51% antes que acabe
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+      {/* Content Section - Interactive Accordion */}
+      <section className="py-16 md:py-24 px-4 bg-card">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-serif font-bold text-center mb-4">
+            O que tem dentro do{" "}
+            <span className="gradient-text-rose">eBook</span>
+          </h2>
+          <p className="text-center text-muted-foreground text-lg mb-12">
+            5 capítulos transformadores + bônus exclusivos
+          </p>
 
-            <Card className="border-accent/30 hover:border-accent transition-colors animate-fade-in">
-              <CardContent className="p-6 flex items-center gap-4">
-                <Users className="w-12 h-12 text-accent flex-shrink-0" />
-                <div>
-                  <h3 className="font-bold text-lg mb-1">Mais de 500 Downloads</h3>
-                  <p className="text-sm text-muted-foreground">
-                    Centenas de mulheres já estão transformando suas vidas
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+          <Accordion type="single" collapsible className="space-y-4">
+            {[
+              {
+                value: "cap1",
+                title: "Capítulo 1: O que é sex appeal de verdade",
+                description:
+                  "Desconstrua mitos e entenda o que realmente desperta desejo e admiração. Não tem a ver com perfeição física — mas com energia.",
+              },
+              {
+                value: "cap2",
+                title: "Capítulo 2: Linguagem corporal sedutora",
+                description:
+                  "Aprenda gestos, posturas e micro expressões que comunicam confiança, mistério e sensualidade de forma natural.",
+              },
+              {
+                value: "cap3",
+                title: "Capítulo 3: Autoestima inabalável",
+                description:
+                  "Técnicas práticas para fortalecer sua autoestima de dentro para fora e irradiar segurança em qualquer ambiente.",
+              },
+              {
+                value: "cap4",
+                title: "Capítulo 4: Estilo que encanta",
+                description:
+                  "Como se vestir para expressar sua personalidade e ser lembrada — sem precisar mostrar demais.",
+              },
+              {
+                value: "cap5",
+                title: "Capítulo 5: O ritual da mulher magnética",
+                description:
+                  "Rotina diária de práticas mentais, físicas e emocionais para manter seu poder pessoal sempre ativo.",
+              },
+              {
+                value: "bonus",
+                title: "🎁 Bônus Exclusivos",
+                description:
+                  "Checklist prático para aplicar no dia a dia + áudio guiado de afirmações poderosas para fortalecer sua autoestima.",
+              },
+            ].map((chapter) => (
+              <AccordionItem
+                key={chapter.value}
+                value={chapter.value}
+                className="border-2 border-border hover:border-primary/50 rounded-lg px-6 transition-all duration-300 bg-background"
+              >
+                <AccordionTrigger className="text-left text-lg md:text-xl font-semibold hover:text-primary">
+                  {chapter.title}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed pt-2">
+                  {chapter.description}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
         </div>
       </section>
 
-      {/* For Who Section */}
-      <section className="py-16 md:py-24 px-4 md:px-6">
-        <div className="container max-w-4xl mx-auto">
-          <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-3xl md:text-4xl mb-4">
-              Este eBook é <span className="gradient-text">Pra Você</span> Se...
-            </h2>
-          </div>
+      {/* For Whom Section */}
+      <section className="py-16 md:py-24 px-4">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-serif font-bold text-center mb-4">
+            Este eBook é{" "}
+            <span className="gradient-text-rose">perfeito para você</span>
+          </h2>
+          <p className="text-center text-muted-foreground text-lg mb-12">
+            Se você se identifica com alguma dessas situações:
+          </p>
 
-          <div className="grid sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {[
-              "Você se sente invisível ou apagada em ambientes sociais",
-              "Quer ser mais desejada e admirada sem forçar a barra",
-              "Está cansada de se comparar com outras mulheres",
-              "Quer aprender a se amar antes de buscar validação externa",
-              "Deseja aumentar sua confiança e presença de forma autêntica",
-              "Quer entender o poder da sua feminilidade única",
+              {
+                text: "Se sente apagada ou invisível em ambientes sociais",
+                icon: Eye,
+              },
+              {
+                text: "Quer ser mais desejada e valorizada",
+                icon: Heart,
+              },
+              {
+                text: "Está cansada de correr atrás de atenção",
+                icon: Zap,
+              },
+              {
+                text: "Quer se amar primeiro e dominar qualquer ambiente",
+                icon: Crown,
+              },
             ].map((item, index) => (
               <Card
                 key={index}
-                className="hover:shadow-lg transition-all duration-300 hover:scale-105 animate-fade-in"
-                style={{ animationDelay: `${index * 80}ms` }}
+                className="p-6 flex items-start gap-4 border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-[var(--shadow-elegant)] animate-fade-in"
+                style={{ animationDelay: `${index * 100}ms` }}
               >
-                <CardContent className="p-6 flex items-start gap-4">
-                  <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                  <p className="text-lg">{item}</p>
-                </CardContent>
+                <CheckCircle2 className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
+                <p className="text-lg leading-relaxed">{item.text}</p>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
+      {/* Urgency & Scarcity */}
+      <section className="py-16 px-4 bg-card">
+        <div className="max-w-4xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card className="p-8 text-center border-2 border-primary/50 shadow-[var(--shadow-elegant)] animate-pulse-slow">
+              <Zap className="w-12 h-12 text-accent mx-auto mb-4" />
+              <h3 className="text-2xl font-serif font-bold mb-2 gradient-text">
+                Oferta por tempo limitado
+              </h3>
+              <p className="text-muted-foreground">
+                Preço promocional de lançamento válido apenas esta semana
+              </p>
+            </Card>
+
+            <Card className="p-8 text-center border-2 border-accent/50 shadow-[var(--shadow-gold)] animate-pulse-slow">
+              <Sparkles className="w-12 h-12 text-primary mx-auto mb-4" />
+              <h3 className="text-2xl font-serif font-bold mb-2">
+                Mais de{" "}
+                <span className="gradient-text-rose">500 mulheres</span>
+              </h3>
+              <p className="text-muted-foreground">
+                Já desbloquearam sua nova versão com este guia
+              </p>
+            </Card>
+          </div>
+        </div>
+      </section>
+
       {/* Guarantee Section */}
-      <section className="py-16 md:py-24 px-4 md:px-6 bg-secondary/50">
-        <div className="container max-w-3xl mx-auto">
-          <Card className="relative overflow-hidden border-2 border-accent shadow-[var(--shadow-gold)] animate-scale-in">
-            <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent" />
-            <CardContent className="p-8 md:p-12 relative z-10">
-              <div className="flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
-                <div className="w-24 h-24 bg-accent rounded-full flex items-center justify-center flex-shrink-0 shadow-[var(--shadow-gold)]">
-                  <Shield className="w-12 h-12 text-accent-foreground" />
-                </div>
-                <div className="space-y-3 flex-1">
-                  <h3 className="text-2xl md:text-3xl font-bold">Garantia de 7 Dias</h3>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    Experimente o eBook sem riscos. Se em 7 dias você não estiver satisfeita,
-                    devolvemos 100% do seu dinheiro. Sem perguntas, sem burocracias.
-                  </p>
-                </div>
+      <section className="py-16 md:py-24 px-4">
+        <div className="max-w-3xl mx-auto">
+          <Card className="relative p-8 md:p-12 text-center border-2 border-accent/50 shadow-[var(--shadow-gold)] overflow-hidden animate-scale-in">
+            <div
+              className="absolute inset-0 opacity-5"
+              style={{ background: "var(--gradient-gold)" }}
+            />
+
+            <div className="relative">
+              <div className="inline-flex items-center justify-center w-20 h-20 md:w-24 md:h-24 rounded-full bg-accent/10 border-4 border-accent mb-6 animate-pulse-slow">
+                <Shield className="w-10 h-10 md:w-12 md:h-12 text-accent" />
               </div>
-            </CardContent>
+
+              <h3 className="text-2xl md:text-4xl font-serif font-bold mb-4 gradient-text">
+                Garantia de 7 Dias
+              </h3>
+
+              <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+                Se em até 7 dias você não sentir uma transformação real na sua
+                autoestima e presença,{" "}
+                <span className="font-bold text-foreground">
+                  devolvemos seu dinheiro
+                </span>
+                . Sem perguntas, sem complicação.
+              </p>
+            </div>
           </Card>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 md:py-24 px-4 md:px-6">
-        <div className="container max-w-3xl mx-auto">
-          <div className="text-center mb-12 animate-fade-in">
-            <h2 className="text-3xl md:text-4xl mb-4">Perguntas Frequentes</h2>
-            <p className="text-muted-foreground text-lg">
-              Tire suas dúvidas antes de começar sua transformação
-            </p>
-          </div>
+      <section className="py-16 md:py-24 px-4 bg-card">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-5xl font-serif font-bold text-center mb-12">
+            Perguntas <span className="gradient-text-rose">Frequentes</span>
+          </h2>
 
           <Accordion type="single" collapsible className="space-y-4">
-            <AccordionItem
-              value="item-1"
-              className="border border-border rounded-lg px-6 hover:border-primary transition-colors"
-            >
-              <AccordionTrigger className="text-left text-lg font-semibold hover:text-primary">
-                O eBook é físico ou digital?
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground leading-relaxed">
-                É 100% digital! Você recebe o link para download imediatamente após a confirmação do
-                pagamento e pode ler no celular, tablet ou computador, quando e onde quiser.
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem
-              value="item-2"
-              className="border border-border rounded-lg px-6 hover:border-primary transition-colors"
-            >
-              <AccordionTrigger className="text-left text-lg font-semibold hover:text-primary">
-                Em quanto tempo começo a ver resultado?
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground leading-relaxed">
-                Muitas mulheres relatam mudanças na primeira semana! Os exercícios de linguagem
-                corporal e autoestima geram resultados rápidos. Mas a transformação completa acontece
-                com a prática consistente dos rituais ensinados.
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem
-              value="item-3"
-              className="border border-border rounded-lg px-6 hover:border-primary transition-colors"
-            >
-              <AccordionTrigger className="text-left text-lg font-semibold hover:text-primary">
-                Preciso estar namorando para aplicar?
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground leading-relaxed">
-                Não! Na verdade, o eBook é sobre VOCÊ. É sobre despertar sua essência, aumentar sua
-                autoestima e presença. Funciona perfeitamente para solteiras, comprometidas ou
-                qualquer mulher que queira se sentir mais poderosa e confiante.
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem
-              value="item-4"
-              className="border border-border rounded-lg px-6 hover:border-primary transition-colors"
-            >
-              <AccordionTrigger className="text-left text-lg font-semibold hover:text-primary">
-                Como recebo o eBook após o pagamento?
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground leading-relaxed">
-                Após a confirmação do pagamento, você recebe um e-mail automático com o link para
-                download. O acesso é imediato e vitalício - você pode baixar quantas vezes quiser!
-              </AccordionContent>
-            </AccordionItem>
+            {[
+              {
+                question: "É físico ou digital?",
+                answer:
+                  "É 100% digital! Você recebe o eBook em PDF no seu e-mail imediatamente após a confirmação do pagamento. Pode ler no celular, tablet ou computador.",
+              },
+              {
+                question: "Como recebo o acesso?",
+                answer:
+                  "Assim que o pagamento for aprovado, você recebe um e-mail com o link de download. O acesso é imediato e vitalício.",
+              },
+              {
+                question: "Serve para quem está solteira?",
+                answer:
+                  "Com certeza! O eBook é sobre você se reconectar com sua essência, aumentar sua autoestima e presença. Funciona esteja você solteira, namorando ou casada. É sobre se sentir poderosa, não sobre status de relacionamento.",
+              },
+              {
+                question: "Tem garantia?",
+                answer:
+                  "Sim! Você tem 7 dias de garantia incondicional. Se não gostar ou não sentir resultado, basta pedir reembolso total.",
+              },
+              {
+                question: "Posso parcelar?",
+                answer:
+                  "Sim! Você pode pagar à vista por R$47,90 ou parcelar em até 12x de R$5,33 no cartão de crédito.",
+              },
+            ].map((faq, index) => (
+              <AccordionItem
+                key={index}
+                value={`faq-${index}`}
+                className="border-2 border-border hover:border-primary/50 rounded-lg px-6 transition-all duration-300 bg-background"
+              >
+                <AccordionTrigger className="text-left text-lg md:text-xl font-semibold hover:text-primary">
+                  {faq.question}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed pt-2">
+                  {faq.answer}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
           </Accordion>
         </div>
       </section>
 
       {/* Final CTA Section */}
-      <section id="cta-section" className="py-16 md:py-24 px-4 md:px-6 bg-gradient-to-b from-primary/5 to-secondary/50">
-        <div className="container max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
-          <h2 className="text-3xl md:text-5xl leading-tight">
-            Pronta Para Despertar Seu <span className="gradient-text">Sex Appeal</span>?
+      <section
+        id="cta-final"
+        className="py-16 md:py-24 px-4 relative overflow-hidden"
+      >
+        <div
+          className="absolute inset-0 opacity-20"
+          style={{ background: "var(--gradient-hero)" }}
+        />
+
+        <div className="relative max-w-4xl mx-auto text-center space-y-8">
+          <h2 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight">
+            Está pronta para se tornar{" "}
+            <span className="gradient-text-rose text-shadow-glow">
+              inesquecível
+            </span>
+            ?
           </h2>
-          
-          <div className="space-y-4">
-            <div className="flex items-center justify-center gap-3">
-              <span className="text-2xl text-muted-foreground line-through">R$ 97,00</span>
-              <span className="bg-accent text-accent-foreground px-4 py-2 rounded-lg text-lg font-bold">
-                -51% OFF
-              </span>
-            </div>
-            <div className="text-5xl md:text-6xl font-bold gradient-text">R$ 47,90</div>
-            <p className="text-muted-foreground">Acesso imediato • Pagamento 100% seguro</p>
-          </div>
 
-          <Button
-            size="xl"
-            variant="cta"
-            className="animate-pulse-glow"
-            onClick={() => {
-              // Aqui você integraria com o sistema de pagamento
-              alert("Integração com sistema de pagamento aqui!");
-            }}
-          >
-            Quero Acessar Agora
-            <ArrowRight className="ml-2" />
-          </Button>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
+            Desperte sua sensualidade natural, aumente sua autoestima e atraia
+            olhares por onde passar.
+          </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-sm text-muted-foreground pt-6">
-            <div className="flex items-center gap-2">
-              <Shield className="w-5 h-5 text-primary" />
-              <span>Garantia de 7 dias</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-5 h-5 text-primary" />
-              <span>Acesso vitalício</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Star className="w-5 h-5 text-accent" />
-              <span>Bônus inclusos</span>
-            </div>
-          </div>
-
-          <Card className="mt-12 border-primary/20 max-w-md mx-auto animate-scale-in">
-            <CardContent className="p-6">
-              <div className="flex items-start gap-3 text-left">
-                <Sparkles className="w-6 h-6 text-primary flex-shrink-0 mt-1" />
-                <div>
-                  <p className="font-semibold mb-1">Por que R$ 47,90?</p>
-                  <p className="text-sm text-muted-foreground">
-                    Queremos que toda mulher tenha acesso a esse conhecimento transformador. O
-                    investimento é simbólico comparado ao valor da sua autoestima renovada.
-                  </p>
-                </div>
+          <div className="space-y-6">
+            <div className="space-y-3">
+              <div className="flex items-center justify-center gap-4 flex-wrap">
+                <span className="text-3xl text-muted-foreground line-through">
+                  R$97,00
+                </span>
+                <span className="text-5xl md:text-6xl font-bold gradient-text-rose text-shadow-glow">
+                  R$47,90
+                </span>
               </div>
-            </CardContent>
-          </Card>
+              <p className="text-xl">
+                ou em até{" "}
+                <span className="font-bold gradient-text">
+                  12x de R$5,33 no cartão
+                </span>
+              </p>
+            </div>
+
+            <Button
+              size="xl"
+              variant="cta"
+              className="shadow-[var(--shadow-glow)] animate-pulse-glow text-base md:text-xl px-8 md:px-16 h-16 md:h-20"
+            >
+              🔥 QUERO ME TORNAR INESQUECÍVEL AGORA!
+            </Button>
+
+            <div className="flex flex-col items-center gap-3 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="w-5 h-5 text-primary" />
+                <span>Acesso imediato após confirmação</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Shield className="w-5 h-5 text-accent" />
+                <span>Compra 100% segura e protegida</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Heart className="w-5 h-5 text-primary" />
+                <span>7 dias de garantia incondicional</span>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Floating CTA Button - Mobile */}
-      {isCtaFixed && (
-        <div className="fixed bottom-0 left-0 right-0 p-4 bg-background/95 backdrop-blur-md border-t border-border shadow-lg z-50 animate-fade-in md:hidden">
-          <Button
-            size="lg"
-            variant="cta"
-            className="w-full"
-            onClick={() => {
-              alert("Integração com sistema de pagamento aqui!");
-            }}
-          >
-            Comprar Agora - R$ 47,90
-            <ArrowRight className="ml-2" />
-          </Button>
-        </div>
-      )}
-
       {/* Footer */}
-      <footer className="py-8 px-4 border-t border-border">
-        <div className="container max-w-6xl mx-auto text-center text-sm text-muted-foreground">
-          <p>© 2024 Desperte Seu Sex Appeal. Todos os direitos reservados.</p>
-          <p className="mt-2">
-            Pagamento 100% seguro • Garantia de 7 dias • Acesso imediato
-          </p>
+      <footer className="py-8 px-4 border-t border-border bg-card">
+        <div className="max-w-4xl mx-auto text-center text-sm text-muted-foreground space-y-2">
+          <p>© 2025 Desperte Seu Sex Appeal. Todos os direitos reservados.</p>
+          <p>Este produto não garante resultados específicos e individuais podem variar.</p>
         </div>
       </footer>
     </div>
