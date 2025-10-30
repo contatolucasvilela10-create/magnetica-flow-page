@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import {
   Accordion,
   AccordionContent,
@@ -212,49 +213,109 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonial Section */}
-      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4">
-        <div className="max-w-4xl mx-auto">
-          <Card className="relative p-6 sm:p-8 md:p-12 border-2 border-primary/30 shadow-[var(--shadow-elegant)] overflow-hidden animate-scale-in">
-            <div
-              className="absolute top-0 left-0 w-24 h-24 sm:w-32 sm:h-32 opacity-10"
-              style={{
-                background: "var(--gradient-rose)",
-              }}
-            />
-            <div
-              className="absolute bottom-0 right-0 w-24 h-24 sm:w-32 sm:h-32 opacity-10"
-              style={{
-                background: "var(--gradient-gold)",
-              }}
-            />
+      {/* Testimonial Section - Enhanced with Multiple Social Proofs */}
+      <section className="py-12 sm:py-16 md:py-20 lg:py-24 px-4 bg-gradient-to-b from-rose-50/50 to-transparent dark:from-rose-950/20 dark:to-transparent">
+        <div className="max-w-7xl mx-auto">
+          {/* Section Title */}
+          <div className="text-center mb-8 sm:mb-12 md:mb-16 animate-fade-in">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 gradient-text-rose">
+              Transformações Reais
+            </h2>
+            <p className="text-sm sm:text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto px-2">
+              Veja o que mulheres como você estão dizendo sobre sua jornada de autodescoberta
+            </p>
+          </div>
 
-            <div className="relative">
-              <Heart className="w-10 h-10 sm:w-12 sm:h-12 md:w-16 md:h-16 text-primary mb-4 sm:mb-6 mx-auto animate-pulse-slow" />
+          {/* Testimonials Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-8 sm:mb-12">
+            {/* Testimonial 1 - Mariana */}
+            <Card className="border-2 border-primary/20 backdrop-blur-sm bg-card/95 shadow-[var(--shadow-elegant)] hover:border-primary/50 hover:scale-105 transition-all duration-300 animate-fade-in">
+              <CardContent className="p-6 sm:p-8 space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-primary to-primary-glow flex items-center justify-center text-white font-bold text-lg sm:text-xl">
+                    M
+                  </div>
+                  <div className="flex flex-col">
+                    <p className="font-semibold text-base sm:text-lg gradient-text-rose">Mariana</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">28 anos</p>
+                  </div>
+                  <Heart className="w-6 h-6 sm:w-7 sm:h-7 ml-auto text-primary fill-primary animate-pulse" />
+                </div>
+                
+                <blockquote className="text-sm sm:text-base font-serif italic leading-relaxed text-foreground/90">
+                  "Eu sempre fui tímida e achava que sex appeal era coisa de modelo. Depois de ler este ebook, descobri que estava dentro de mim o tempo todo. A forma como as pessoas me olham agora é completamente diferente!"
+                </blockquote>
+                
+                <div className="flex justify-center gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star key={star} className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
 
-              <blockquote className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-serif italic text-center mb-4 sm:mb-6 leading-relaxed px-2">
-                "Depois de aplicar só um dos ensinamentos, um cara que me
-                ignorava começou a me elogiar. Eu me senti{" "}
-                <span className="gradient-text-rose font-bold not-italic">
-                  PODEROSA
-                </span>
-                ."
-              </blockquote>
+            {/* Testimonial 2 - Amanda */}
+            <Card className="border-2 border-primary/20 backdrop-blur-sm bg-card/95 shadow-[var(--shadow-elegant)] hover:border-primary/50 hover:scale-105 transition-all duration-300 animate-fade-in" style={{ animationDelay: '100ms' }}>
+              <CardContent className="p-6 sm:p-8 space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center text-white font-bold text-lg sm:text-xl">
+                    A
+                  </div>
+                  <div className="flex flex-col">
+                    <p className="font-semibold text-base sm:text-lg gradient-text-rose">Amanda</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">32 anos</p>
+                  </div>
+                  <Sparkles className="w-6 h-6 sm:w-7 sm:h-7 ml-auto text-primary animate-pulse" />
+                </div>
+                
+                <blockquote className="text-sm sm:text-base font-serif italic leading-relaxed text-foreground/90">
+                  "Aprendi que sex appeal não é só sobre o físico. Agora entro em qualquer lugar me sentindo confiante e as pessoas percebem. É incrível como pequenas mudanças na postura fazem toda a diferença!"
+                </blockquote>
+                
+                <div className="flex justify-center gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star key={star} className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
 
-              <p className="text-center text-muted-foreground text-base sm:text-lg">
-                — Mariana, 27 anos
-              </p>
+            {/* Testimonial 3 - Júlia */}
+            <Card className="border-2 border-primary/20 backdrop-blur-sm bg-card/95 shadow-[var(--shadow-elegant)] hover:border-primary/50 hover:scale-105 transition-all duration-300 animate-fade-in md:col-span-2 lg:col-span-1" style={{ animationDelay: '200ms' }}>
+              <CardContent className="p-6 sm:p-8 space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white font-bold text-lg sm:text-xl">
+                    J
+                  </div>
+                  <div className="flex flex-col">
+                    <p className="font-semibold text-base sm:text-lg gradient-text-rose">Júlia</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">29 anos</p>
+                  </div>
+                  <Crown className="w-6 h-6 sm:w-7 sm:h-7 ml-auto text-primary animate-pulse" />
+                </div>
+                
+                <blockquote className="text-sm sm:text-base font-serif italic leading-relaxed text-foreground/90">
+                  "As técnicas de linguagem corporal mudaram tudo. Recebi 3 cantadas em uma semana — e olha que eu nem mudei meu visual! O segredo mesmo estava na energia que passei a transmitir."
+                </blockquote>
+                
+                <div className="flex justify-center gap-1">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <Star key={star} className="w-4 h-4 sm:w-5 sm:h-5 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
 
-              <div className="flex justify-center gap-1 mt-4 sm:mt-6">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <Star
-                    key={star}
-                    className="w-5 h-5 sm:w-6 sm:h-6 fill-accent text-accent"
-                  />
-                ))}
-              </div>
-            </div>
-          </Card>
+          {/* Impact Statistics */}
+          <div className="flex flex-wrap justify-center gap-4 sm:gap-6 animate-fade-in" style={{ animationDelay: '300ms' }}>
+            <Badge variant="secondary" className="px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm md:text-base font-semibold border-2 border-primary/30">
+              ⭐ Mais de 500 mulheres transformadas
+            </Badge>
+            <Badge variant="secondary" className="px-4 sm:px-6 py-2 sm:py-3 text-xs sm:text-sm md:text-base font-semibold border-2 border-primary/30">
+              💯 98% de satisfação
+            </Badge>
+          </div>
         </div>
       </section>
 
