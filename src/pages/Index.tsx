@@ -17,7 +17,7 @@ import {
   CheckCircle2,
   Gift,
 } from "lucide-react";
-import ebookCover from "@/assets/ebook-cover-new.png";
+import ebookCover from "@/assets/ebook-cover-final.png";
 import { useState, useEffect } from "react";
 
 const Index = () => {
